@@ -1,5 +1,7 @@
 # Restbot: Automate testing on JSON API's using the YAML language.
 
+(In development currently, started on 15 april 2018.)
+
 ## Features
 - Test GET,POST,PUT,DELETE requests
 - Multiple assertions checks
