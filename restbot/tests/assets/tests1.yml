@@ -1,0 +1,14 @@
+url: "http://localhost:3000/api/boards"
+tests:
+    - name: "Testing restbot #1"
+      path: "/"
+      request: "GET"
+      expected:
+          - status: 200
+    - name: "Testing restbot #2"
+      path: "/hello"
+      request: "POST"
+      data:
+          name: "As a user, I want to test GET/POST requests"
+      expected:
+          - not_content: ""
