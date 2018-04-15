@@ -23,7 +23,7 @@ Use the <b>expected</b> parameter to assert expected behaviour from a test.
 
 Options:
 | option | description |
-|--|--|
+|-|-|
 | content | Matches if value is in content, case-insensitive |
 | value | Matches if value is equal to content, case-sensitive |
 | status | Matches if value is equal to HTTP response code |
