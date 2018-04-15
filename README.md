@@ -21,7 +21,6 @@ sudo pip3 install -r requirements.txt
 ## Assertion criteria
 Use the <b>expected</b> parameter to assert expected behaviour from a test.
 
-Options:
 | option | description |
 |-|-|
 | content | Matches if value is in content, case-insensitive |
