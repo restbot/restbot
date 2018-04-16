@@ -17,6 +17,7 @@ tests:
       expected:
         - status: 200
         - content: "Automate testing on JSON API's"
+
 $ restbot/restbot.py restbot/tests/assets/tests-github.yml 
 Time: 1287 ms
 
