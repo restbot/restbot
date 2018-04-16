@@ -11,7 +11,44 @@ import restbot
 
 class TestCase1(TestCase):
 
+    def test_assert_test4(self):
+        """
+        Test false status code, good content
+        """
+        test = {
+              "name": "Testing HTTPBIN.org, 200 status",
+              "path": "/",
+              "url": "http://httpbin.org/get",
+              "request": "GET",
+              "expected": [{"status":404},{"content":"Accept-Encoding"}]
+        }
+        result,errors = restbot.assert_test(test)
+        expected = False
+        self.assertEqual(expected,result)
+        self.assertEqual(1,len(errors))
+        self.assertEqual(("status",404,200),errors[0])
+
+    def test_assert_test3(self):
+        """
+        Test good status code, good content
+        """
+        test = {
+              "name": "Testing HTTPBIN.org, 200 status",
+              "path": "/",
+              "url": "http://httpbin.org/get",
+              "request": "GET",
+              "expected": [{"status":200},{"content":"Accept-Encoding"}]
+        }
+        result,errors = restbot.assert_test(test)
+        expected = True
+        self.assertEqual(expected,result)
+        self.assertEqual(0,len(errors))
+
+
     def test_assert_test2(self):
+        """
+        Test false status code
+        """
         test = {
               "name": "Testing HTTPBIN.org, 200 status",
               "path": "/",
@@ -26,6 +63,9 @@ class TestCase1(TestCase):
         self.assertEqual(("status",300,200),errors[0])
 
     def test_assert_test(self):
+        """
+        Test good status code
+        """
         test = {
               "name": "Testing HTTPBIN.org, 200 status",
               "path": "/",
@@ -54,13 +94,13 @@ class TestCase1(TestCase):
         test = {
               "name": "Testing restbot #1",
               "path": "/",
-              "url": "http://localhost:3000/api/boards",
+              "url": "http://httpbin.org/get",
               "request": "GET",
               "expected": [{"status":200}]
         }
         result = restbot.test_to_request(test)
         expected = {
-            "url": "http://localhost:3000/api/boards",
+            "url": "http://httpbin.org/get",
             "verb" : "GET",
             "headers": {},
             "data": {},
@@ -73,13 +113,13 @@ class TestCase1(TestCase):
         expected = [{
             "name": "Testing restbot #1",
               "path": "/",
-              "url": "http://localhost:3000/api/boards",
+              "url": "http://httpbin.org/get",
               "request": "GET",
              "expected": [{"status":200}]
         },{
             "name": "Testing restbot #2",
               "path": "/hello",
-              "url": "http://localhost:3000/api/boards/hello",
+              "url": "http://httpbin.org/get/hello",
               "request": "POST",
               "data":{"name":"As a user, I want to test GET/POST requests"},
              "expected": [{"not_content":""}]

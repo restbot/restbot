@@ -1,4 +1,4 @@
-url: "http://localhost:3000/api/boards"
+url: "http://httpbin.org/get"
 tests:
     - name: "Testing restbot #1"
       path: "/"
