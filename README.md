@@ -6,6 +6,14 @@
 - Test GET,POST,PUT,DELETE requests
 - Multiple assertions checks
 
+## Example
+```
+$ restbot/restbot.py restbot/tests/assets/tests-github.yml 
+Time: 1287 ms
+
+OK (1 tests, 1 assertions)
+```
+
 ## Prerequisites
 To run Restbot, you will need the following:
 - git
