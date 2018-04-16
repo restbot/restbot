@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+
+import sys
+import argparse
 import yaml
 import time
 import requests
@@ -15,12 +19,27 @@ def main(args):
         time.sleep(3)
 
     tests = yml_to_tests(args["yml_file"])
+    time_start = time.time()
+    errors_total = 0
+    test_total = 0
     for test in tests:
-        print(test["name"])
         result,errors = assert_test(test)
         if errors:
-            print(errors)
+            print(test["name"])
+            for error in errors:
+                errors_total +=1
+                print(error)
 
+        test_total +=1
+
+    time_total = int(round((time.time()-time_start) * 1000))
+
+    print("Time: %d ms" % time_total)
+    print("")
+    if errors_total != 0:
+        print("FAILURE (%d tests, %d failures)" % (test_total,error_total))
+    else:
+        print("OK (%d tests, %d assertions)" % (test_total,test_total))
 
 class Asserter():
 
@@ -133,14 +152,6 @@ def yml_to_tests(yml_file):
     return tests
 
 if __name__ == '__main__':
-    import sys
-    if '--sample' in sys.argv:
-        sample_testfile()
-        exit()
-    if '--sample-header' in sys.argv:
-        sample_headerfile()
-        exit()
-    import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("yml_file", help="Test script (.yml)")
     parser.add_argument('-i','--insecure',help='Do not verify SSL certificates (insecure)',action='store_true')

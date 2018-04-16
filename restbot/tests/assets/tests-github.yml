@@ -1,0 +1,8 @@
+url: "https://github.com/restbot/restbot"
+tests:
+    - name: "Testing if Restbot repo is up"
+      path: "/"
+      request: "GET"
+      expected:
+        - status: 200
+        - content: "Automate testing on JSON API's"
