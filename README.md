@@ -8,6 +8,15 @@
 
 ## Example
 ```
+$ cat restbot/tests/assets/tests-github.yml
+url: "https://github.com/restbot/restbot"
+tests:
+    - name: "Testing if Restbot repo is up"
+      path: "/"
+      request: "GET"
+      expected:
+        - status: 200
+        - content: "Automate testing on JSON API's"
 $ restbot/restbot.py restbot/tests/assets/tests-github.yml 
 Time: 1287 ms
 
