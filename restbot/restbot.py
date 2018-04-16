@@ -1,9 +1,26 @@
 import yaml
 import time
 import requests
-
+import urllib3
 verify = True
 global_headers = {}
+
+def main(args):
+    if args.get("insecure"):
+        verify = False
+
+        # Hide errors for each requests
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        print("InsecureRequestWarning: Unverified HTTPS request are going to be made")
+        time.sleep(3)
+
+    tests = yml_to_tests(args["yml_file"])
+    for test in tests:
+        print(test["name"])
+        result,errors = assert_test(test)
+        if errors:
+            print(errors)
+
 
 class Asserter():
 
@@ -114,3 +131,19 @@ def yml_to_tests(yml_file):
             tests.append(test)
 
     return tests
+
+if __name__ == '__main__':
+    import sys
+    if '--sample' in sys.argv:
+        sample_testfile()
+        exit()
+    if '--sample-header' in sys.argv:
+        sample_headerfile()
+        exit()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("yml_file", help="Test script (.yml)")
+    parser.add_argument('-i','--insecure',help='Do not verify SSL certificates (insecure)',action='store_true')
+    argv = parser.parse_args()
+    vargs = vars(argv)
+    main(vargs)
